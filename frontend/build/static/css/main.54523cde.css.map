@@ -1,0 +1,1 @@
+{"version":3,"file":"static/css/main.54523cde.css","mappings":"AAAA,KAEE,wBAAyB,CACzB,UAAW,CAFX,sBAGF,CAEA,SACE,qBACF,CAEA,aACE,cACF","sources":["App.css"],"sourcesContent":["body {\n  font-family: sans-serif;\n  background-color: #f9f9f9;\n  color: #111;\n}\n\ntable th {\n  border: 1px solid #ccc;\n}\n\ninput, button {\n  font-size: 1rem;\n}\n"],"names":[],"sourceRoot":""}
