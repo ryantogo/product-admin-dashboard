@@ -1,0 +1,13 @@
+body {
+  font-family: sans-serif;
+  background-color: #f9f9f9;
+  color: #111;
+}
+
+table th {
+  border: 1px solid #ccc;
+}
+
+input, button {
+  font-size: 1rem;
+}
