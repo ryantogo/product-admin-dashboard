@@ -10,20 +10,26 @@ app.use(express.json());
 
 app.get('/products', async (req, res) => {
   try {
+    console.log("🔄 [GET] /products");
     const [products] = await db.query('SELECT * FROM Products');
+    console.log(`✅ Found ${products.length} product(s)`);
     res.json(products);
   } catch (err) {
+    console.error("❌ Error in /products:", err);
     res.status(500).json({ error: err.message });
   }
 });
 
 app.get('/products/:sku', async (req, res) => {
   try {
+    console.log(`🔄 [GET] /products/${req.params.sku}`);
     const [product] = await db.query('SELECT * FROM Products WHERE base_sku = ?', [req.params.sku]);
-    if (!product.length) return res.status(404).json({ error: 'Product not found' });
+    if (!product.length) {
+      console.warn("⚠️ Product not found:", req.params.sku);
+      return res.status(404).json({ error: 'Product not found' });
+    }
 
     const productId = product[0].product_id;
-
     const [groups] = await db.query('SELECT * FROM OptionGroups WHERE product_id = ?', [productId]);
 
     for (const group of groups) {
@@ -33,8 +39,9 @@ app.get('/products/:sku', async (req, res) => {
 
     res.json({ ...product[0], option_groups: groups });
   } catch (err) {
+    console.error("❌ Error in /products/:sku:", err);
     res.status(500).json({ error: err.message });
   }
 });
 
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
